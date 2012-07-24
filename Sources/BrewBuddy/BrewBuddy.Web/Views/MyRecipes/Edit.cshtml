@@ -1,0 +1,61 @@
+﻿@model BrewBuddy.Web.ViewModels.RecipeViewModel
+
+@{
+    ViewBag.Title = "Edit a recipe";
+    ViewBag.Navigation = "myrecipes";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>Add some extra flavour</small></h1>
+    </div>
+    
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Your recipe</legend>
+
+            <div class="control-group">
+                @Html.LabelFor(model => model.Title)
+                @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>            
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { rows = "6", @class = "input-xxlarge" })
+                @Html.ValidationMessageFor(model => model.Description)
+                <p><small><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">MarkDown</a> is supported</small></p>
+            </div>
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.Ingredients)
+                @Html.TextAreaFor(model => model.Ingredients, new { rows = "6", @class = "input-xxlarge" })
+                @Html.ValidationMessageFor(model => model.Ingredients)
+                <p><small><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">MarkDown</a> is supported</small></p>
+            </div>
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.Instructions)
+                @Html.TextAreaFor(model => model.Instructions, new { rows = "6", @class = "input-xxlarge" })
+                @Html.ValidationMessageFor(model => model.Instructions)
+                <p><small><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">MarkDown</a> is supported</small></p>
+            </div>
+            
+            <hr />
+            <div class="control-group">
+                You can publish your recipe in the public recipe gallery. Others will be able to view and rate your recipe.
+            </div>
+            <div class="control-group">
+                @Html.CheckBoxFor(model => model.IsPublic, new { @class = "inline" }) Publish in public recipe gallery?
+            </div>
+            <hr />
+
+            <div>
+                <input type="submit" value="Save" class="btn btn-primary btn-large"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </div>
+        </fieldset>
+    }
+</section>

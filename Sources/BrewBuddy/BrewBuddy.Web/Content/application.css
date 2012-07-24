@@ -1,0 +1,21 @@
+﻿@media (min-width: 980px) {
+    body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+    }
+}
+
+#full-menu { width: 220px; }
+.avatar { float: left; margin-right: 5px; }
+.size32 { width: 32px; height: 32px; }
+.size160 { width: 160px; height: 160px; }
+
+.hero-unit
+{
+    background-image: url('/Content/images/herobg.jpg');
+    background-repeat: no-repeat;
+}
+
+h2 i 
+{
+    margin-top: 7px;
+}

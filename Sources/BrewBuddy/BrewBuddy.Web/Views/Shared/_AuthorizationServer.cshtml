@@ -1,0 +1,21 @@
+﻿@model WindowsAzure.Acs.Oauth2.AuthorizationServerViewModel
+
+@{
+    ViewBag.Title = string.Format("Authorize {0} to use your account?", Model.ApplicationName);
+    ViewBag.Navigation = "login";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>Choose wisely!</small></h1>
+        <h2>This application will be able to <strong>access resources under your name</strong>.</h2>
+    </div>
+    
+    @using (Html.BeginForm())
+    {
+        <p>
+            <button type="submit" name="Authorize" value="true" class="btn btn-primary btn-success">Yes</button>
+            <a href="@Model.ApplicationUrl?error=usercancelled" class="btn btn-warning">No, take me back to the application</a>
+        </p>
+    }
+</section>

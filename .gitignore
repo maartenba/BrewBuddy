@@ -4,3 +4,16 @@ obj
 
 # mstest test results
 TestResults
+
+# resharper
+_ReSharper*
+
+# other documents
+*.docstates
+*.user
+*.suo
+*.xap
+
+# nuget
+packages*
+!packages.config

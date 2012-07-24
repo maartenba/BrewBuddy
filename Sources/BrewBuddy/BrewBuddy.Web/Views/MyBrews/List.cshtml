@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BrewBuddy.Web.ViewModels.BrewViewModel>
+
+@{
+    ViewBag.Title = "List brews";
+    ViewBag.Navigation = "mybrews";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>What's cooking? Or fermenting?</small></h1>
+    </div>
+
+    <article>
+        <div class="row">
+            <div class="span12">
+                <p>
+                    You can create a brew based on one of @Html.ActionLink("your recipes", "List", "MyRecipes")
+                    or from a @Html.ActionLink("public recipe", "List", "Recipes")
+                </p>
+            </div>
+        </div>
+        
+        @if (Model.Any())
+        {
+            <div class="row">
+                <div class="span12">
+                    <table class="table table-bordered table-striped">
+                        <colgroup>
+                            <col class="span6">
+                            <col class="span2">
+                            <col class="span4">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn"})
+                                        @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn"})
+                                        @Html.ActionLink("Link temperature sensor", "Link", "MyBrews", new { id = item.Id }, new { @class = "btn btn-success" })
+                                        @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger"})
+                                    </td>
+                                </tr>
+                            }
+                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </article>
+</section>

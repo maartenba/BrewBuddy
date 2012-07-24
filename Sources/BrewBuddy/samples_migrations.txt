@@ -1,0 +1,3 @@
+Enable-Migrations -EnableAutomaticMigrations -ProjectName "BrewBuddy.Entities" -StartUpProjectName "BrewBuddy.Web" -ConnectionStringName "DefaultConnection"
+Add-Migration -Name "...." -ProjectName "BrewBuddy.Entities" -StartUpProjectName "BrewBuddy.Web" -ConnectionStringName "DefaultConnection"
+Update-Database -ProjectName "BrewBuddy.Entities" -StartUpProjectName "BrewBuddy.Web" -ConnectionStringName "DefaultConnection"

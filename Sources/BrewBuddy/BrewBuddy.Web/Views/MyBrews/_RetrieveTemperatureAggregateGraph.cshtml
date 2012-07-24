@@ -1,0 +1,49 @@
+﻿@model System.Collections.Generic.IEnumerable<BrewBuddy.Entities.TemperatureAggregate>
+
+@if (Model.Any())
+{
+    <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/raphael/js")"> </script>
+    <script>
+        $(function() {
+            var r = Raphael("temperatureProfile");
+
+            var x = [], y = [];
+            @foreach (var aggregate in Model)
+            {
+                <text>
+                    x.push(@aggregate.When.Ticks);
+                    y.push(@(Math.Round(aggregate.Value, 2).ToString().Replace(",", ".")));
+                </text>
+            }
+
+            var lines = r.linechart(30, 30, 600, 300, x, y, { nostroke: false, axis: "0 0 1 1", symbol: "circle", smooth: true })
+                .hoverColumn(function() {
+                    this.tags = r.set();
+
+                    for (var i = 0, ii = this.y.length; i < ii; i++) {
+                        var tdt = new Date((x[i] - 621355968000000000) / 10000);
+
+                        this.tags.push(r.tag(this.x, this.y[i], tdt.getFullYear() + '-' + (tdt.getMonth() + 1) + '-' + tdt.getDate() + ' ' + tdt.getHours() + ':' + tdt.getMinutes() + ' - ' + this.values[i] + '°C', 160, 10).insertBefore(this).attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]));
+                    }
+                }, function() {
+                    this.tags && this.tags.remove();
+                });
+
+            lines.symbols.attr({ r: 5 });
+
+            // Modify the x axis labels
+            var xText = lines.axis[0].text.items;
+            for (var i in xText) {
+                var d = new Date((parseInt(xText[i].attr('text')) - 621355968000000000) / 10000);
+                xText[i].attr({ 'text': d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() });
+            }
+            ;
+        });
+    </script>
+
+    <article>
+        <h2>Temperature profile</h2>
+    
+        <div id="temperatureProfile"></div>
+    </article>
+}

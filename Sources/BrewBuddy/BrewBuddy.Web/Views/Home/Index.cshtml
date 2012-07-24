@@ -1,0 +1,28 @@
+@{
+    ViewBag.Title = "Monitor your brew online";
+    ViewBag.Navigation = "home";
+}
+
+<div class="hero-unit pagination-centered">
+    <h1>We're your BrewBuddy!</h1>
+    <p>BrewBuddy is the homebrewer's ideal companion. We track your brew from recipe to bottling.</p>
+    <p><a class="btn btn-primary btn-large" href="@Url.Action("Features", "Home")">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="span4">
+        <h2><i class="icon-signal"></i> Monitor</h2>
+        <p>Track your brew's fermentation process through our detailed temperature monitoring system.</p>
+        <p><a class="btn" href="@Url.Action("Features", "Home")#monitor">View details &raquo;</a></p>
+    </div>
+    <div class="span4">
+        <h2><i class="icon-share"></i> Social brewing</h2>
+        <p>Public recipes and brews. Comment and rate recipes of your brew buddies.</p>
+        <p><a class="btn" href="@Url.Action("Features", "Home")#social">View details &raquo;</a></p>
+    </div>
+    <div class="span4">
+        <h2><i class="icon-book"></i> Remember</h2>
+        <p>What was that recipe again? We track the recipe and brew process so you can easily brew your favourite again at a later time.</p>
+        <p><a class="btn" href="@Url.Action("Features", "Home")#recipe">View details &raquo;</a></p>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@model BrewBuddy.Web.ViewModels.BrewViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Navigation = "mybrews";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>The joy of an awesome beer is near</small></h1>
+        <p><small>Last updated @string.Format("{0:dd/MM/yyyy hh:mm}", Model.LastModified) by @Html.ActionLink(Model.UserName, "Details", "Profile", new { id = Model.UserName }, null)</small></p>
+    </div>
+    
+    <article>
+        <h2>Recipe</h2>
+
+        <h3>Description</h3>
+        <p>@Html.Markdown(Model.Recipe.Description)</p>
+        
+        <h3>Ingredients</h3>
+        <p>@Html.Markdown(Model.Recipe.Ingredients)</p>
+        
+        <h3>Instructions</h3>
+        <p>@Html.Markdown(Model.Recipe.Instructions)</p>
+        
+        <h2>Brew</h2>
+        <h3>Annotations</h3>
+        <p>@Html.Markdown(Model.Annotations)</p>
+        
+        <h3>Status</h3>
+        <p>@Html.Markdown(Model.Status)</p>
+    </article>
+    
+    @Html.Action("RetrieveTemperatureAggregateGraph", new { id = Model.Id })
+    
+    <p>
+        @Html.ActionLink("Edit brew", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Link temperature sensor", "Link", "MyBrews", new {id = Model.Id}, new {@class = "btn btn-success"})
+        @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.Recipe.UserName)
+        {
+            @Html.ActionLink("Edit recipe", "Edit", "MyRecipes", new {id = Model.Id}, new {@class = "btn"})
+        }
+    </p>
+</section>

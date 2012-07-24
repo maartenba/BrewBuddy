@@ -1,0 +1,49 @@
+﻿@model BrewBuddy.Web.ViewModels.UserProfileViewModel
+
+@{
+    ViewBag.Title = "Update your profile";
+    ViewBag.Navigation = "editmyprofile";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>Make sure your BrewBuddies know who is the best brewer</small></h1>
+    </div>
+    
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Your profile</legend>
+
+            <div class="control-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>            
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            <div class="control-group">
+                @Html.LabelFor(model => model.Location)
+                @Html.TextBoxFor(model => model.Location, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(model => model.Location)
+            </div>
+
+            <div class="control-group">
+                @Html.LabelFor(model => model.Information)
+                @Html.TextAreaFor(model => model.Information, new { rows = "6", @class = "input-xxlarge" })
+                @Html.ValidationMessageFor(model => model.Information)
+            </div>
+
+            <div>
+                <input type="submit" value="Update" class="btn btn-primary btn-large"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </div>
+        </fieldset>
+    }
+</section>

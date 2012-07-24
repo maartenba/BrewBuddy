@@ -1,0 +1,44 @@
+@model BrewBuddy.Web.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    ViewBag.Navigation = "login";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>Enter your user name and password below</small></h1>
+    </div>
+
+    @using (Html.BeginForm((string)ViewBag.FormAction, "Account", FormMethod.Post, new { @class = "well" }))
+    {
+        @Html.Hidden("ReturnUrl", Request["ReturnUrl"] ?? "");
+        @Html.ValidationSummary(true, "An error occured during login. Please correct the errors and try again.")
+
+        <fieldset>
+            <legend>Login</legend>
+            
+            <div class="control-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            
+            <div class="control-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+
+            <label class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe) Remember me
+            </label>
+
+            <input type="submit" value="Log in" class="btn btn-primary" />
+        </fieldset>
+    }
+
+    <p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+</section>

@@ -1,0 +1,55 @@
+﻿@model BrewBuddy.Web.ViewModels.BrewViewModel
+
+@{
+    ViewBag.Title = "Create a brew";
+    ViewBag.Navigation = "mybrews";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>The joy of brewing is near!</small></h1>
+    </div>
+    
+    @using (Html.BeginForm("Create", "MyBrews")) {
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.RecipeId)
+
+        <fieldset>
+            <legend>Your brew</legend>
+
+            <div class="control-group">
+                @Html.LabelFor(model => model.Title)
+                @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>            
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.Annotations)
+                @Html.TextAreaFor(model => model.Annotations, new { rows = "6", @class = "input-xxlarge" })
+                @Html.ValidationMessageFor(model => model.Annotations)
+                <p><small><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">MarkDown</a> is supported</small></p>
+            </div>
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.Status)
+                @Html.DropDownListFor(model => model.Status, Model.Statuses)
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+            
+            <hr />
+            <div class="control-group">
+                Do you want others to be able to see your brew and its status?
+            </div>
+            <div class="control-group">
+                @Html.CheckBoxFor(model => model.IsPublic, new { @class = "inline" }) Can be consulted from the public recipe gallery?
+            </div>
+            <hr />
+
+            <div>
+                <input type="submit" value="Save" class="btn btn-primary btn-large"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </div>
+        </fieldset>
+    }
+</section>

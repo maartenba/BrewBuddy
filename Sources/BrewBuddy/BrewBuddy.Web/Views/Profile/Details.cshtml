@@ -1,0 +1,37 @@
+﻿@model BrewBuddy.Web.ViewModels.UserProfileViewModel
+
+@{
+    ViewBag.Title = Model.Name ?? User.Identity.Name;
+    ViewBag.Navigation = (Model.IsSelf ? "myprofile" : "home");
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>@(Model.IsSelf ? "That's you!" : "One of our BrewBuddies")</small></h1>
+    </div>
+
+    <article>
+        <div class="row">
+            <div class="span8">
+                <h2>@ViewBag.Title</h2>
+                <h3>@Model.Location</h3>
+        
+                <blockquote>
+                    <p>@(Model.Information ?? "Someone who likes brewing")</p>
+                    <small>@Model.Name</small>
+                </blockquote>
+            </div>
+            <div class="span4 pull-right">
+                @Html.Gravatar(Model.Email, 160, new { title = ViewBag.Title, alt = ViewBag.Title, @class = "avatar size160" })
+            </div>
+        </div>
+
+        
+        @if(Model.IsSelf)
+        {
+            <div>
+                @Html.ActionLink("Edit", "Edit", "Profile", null, new { @class = "btn btn-primary btn-large" })
+            </div>
+        }
+    </article>
+</section>

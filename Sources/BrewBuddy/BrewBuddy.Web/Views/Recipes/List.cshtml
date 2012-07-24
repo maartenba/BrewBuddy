@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BrewBuddy.Web.ViewModels.RecipeViewModel>
+
+@{
+    ViewBag.Title = "Public recipes";
+    ViewBag.Navigation = "recipes";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>Great beers by great people</small></h1>
+    </div>
+
+    <article>
+        @if (Model.Any())
+        {
+            <div class="row">
+                <div class="span12">
+                    @foreach (var item in Model)
+                    {
+                        if (item != Model.First())
+                        {
+                            <hr />
+                        }
+                        <h2>@item.Title <small>by @Html.ActionLink(item.UserName, "Details", "Profile", new { id = item.UserName }, null)</small></h2>
+                        <p>
+                            @Html.Markdown(item.Description)
+                        </p>
+                        <p>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn" })
+                            @Html.ActionLink("Copy to my recipes", "Clone", "MyRecipes", new { id = item.Id }, new { @class = "btn" })
+                            @Html.ActionLink("Brew it!", "Create", "MyBrews", new { recipeId = item.Id }, new { @class = "btn btn-success" })
+                        </p>
+                    }
+                </div>
+            </div>
+        }
+    </article>
+</section>

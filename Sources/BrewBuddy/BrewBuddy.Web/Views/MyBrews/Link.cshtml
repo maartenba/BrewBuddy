@@ -1,0 +1,46 @@
+﻿@model BrewBuddy.Web.ViewModels.BrewViewModel
+
+@{
+    ViewBag.Title = "Link your BrewBuddy sensor to " + Model.Title;
+    ViewBag.Navigation = "myrecipes";
+}
+
+<script>
+    $(function () {
+        $('.unlink').click(function () {
+            $('#SensorId').val('');
+        });
+    });
+</script>
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>Need the info!</small></h1>
+    </div>
+    
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Your brew</legend>
+
+            <div class="control-group">
+                @Html.LabelFor(model => model.Title)
+                @Html.DisplayFor(model => model.Title, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>            
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.SensorId)
+                @Html.TextBoxFor(model => model.SensorId, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(model => model.SensorId)
+            </div>   
+
+            <div>
+                <input type="submit" value="Link sensor" class="btn btn-primary btn-large"/>
+                <input type="submit" value="Unlink sensor" class="btn btn-danger unlink"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </div>
+        </fieldset>
+    }
+</section>

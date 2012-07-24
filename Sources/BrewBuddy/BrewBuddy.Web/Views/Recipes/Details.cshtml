@@ -1,0 +1,30 @@
+﻿@model BrewBuddy.Web.ViewModels.RecipeViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Navigation = "recipes";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>An awesome beer by @Html.ActionLink(Model.UserName, "Details", "Profile", new { id = Model.UserName }, null)</small></h1>
+        <p><small>Last updated @string.Format("{0:dd/MM/yyyy hh:mm}", Model.LastModified) by @Html.ActionLink(Model.UserName, "Details", "Profile", new { id = Model.UserName }, null)</small></p>
+    </div>
+    
+    <article>
+        <h2>Description</h2>
+        <p>@Html.Markdown(Model.Description)</p>
+        
+        <h2>Ingredients</h2>
+        <p>@Html.Markdown(Model.Ingredients)</p>
+        
+        <h2>Instructions</h2>
+        <p>@Html.Markdown(Model.Instructions)</p>
+    </article>
+    
+    
+    <p>
+        @Html.ActionLink("Copy to my recipes", "Clone", "MyRecipes", new { id = Model.Id }, new { @class = "btn" })
+        @Html.ActionLink("Brew it!", "Create", "MyBrews", new {recipeId = Model.Id}, new {@class = "btn btn-success"})
+    </p>
+</section>

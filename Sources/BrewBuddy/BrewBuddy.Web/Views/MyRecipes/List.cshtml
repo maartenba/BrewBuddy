@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BrewBuddy.Web.ViewModels.RecipeViewModel>
+
+@{
+    ViewBag.Title = "List recipes";
+    ViewBag.Navigation = "myrecipes";
+}
+
+<section>
+    <div class="page-header">
+        <h1>@ViewBag.Title <small>Your catalog of great beers</small></h1>
+    </div>
+
+    <article>
+        <div class="row">
+            <div class="span12">
+                <p>
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+        </div>
+        
+        @if (Model.Any())
+        {
+            <div class="row">
+                <div class="span12">
+                    <table class="table table-bordered table-striped">
+                        <colgroup>
+                            <col class="span8">
+                            <col class="span4">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn"})
+                                        @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn"})
+                                        @Html.ActionLink("Brew it!", "Create", "MyBrews", new {recipeId = item.Id}, new {@class = "btn btn-success"})
+                                        @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger"})
+                                    </td>
+                                </tr>
+                            }
+                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </article>
+</section>
